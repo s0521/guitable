@@ -1,17 +1,19 @@
 {
     "collab_server" : "",
     "contents" : "",
-    "created" : 1588132212238.000,
+    "created" : 1588132515331.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "3920630657",
-    "id" : "E140594C",
-    "lastKnownWriteTime" : 1588132209,
-    "last_content_update" : 1588132209,
-    "path" : "D:/GitHub/guitable/R/hello.R",
-    "project_path" : "R/hello.R",
+    "hash" : "0",
+    "id" : "86F93CB4",
+    "lastKnownWriteTime" : 1588141135,
+    "last_content_update" : 1588141135698,
+    "path" : "D:/GitHub/guitable/R/guitable.R",
+    "project_path" : "R/guitable.R",
     "properties" : {
+        "cursorPosition" : "101,15",
+        "scrollLine" : "87"
     },
     "read_only" : false,
     "read_only_alternatives" : [

@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1588132547591.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3116202972",
+    "id" : "3FA19794",
+    "lastKnownWriteTime" : 1588152853,
+    "last_content_update" : 1588152853245,
+    "path" : "D:/GitHub/guitable/R/guitableUI.R",
+    "project_path" : "R/guitableUI.R",
+    "properties" : {
+        "cursorPosition" : "107,0",
+        "scrollLine" : "101"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
