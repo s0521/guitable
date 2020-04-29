@@ -48,54 +48,47 @@ guitable_result_Server <- function(input, output, session, out_dir =NULL) {
 guitable_table_Server <- function(input, output, session, mapingtable =NULL,datanames=NULL) {
   # browser()
   #ls1<-data
+  # if(is.null(mapingtable))return()
   data_names<-c(datanames)
   n_data<-length(data_names)
-  facets_codes<-NULL
-  for (i in 1:n_data){
-    mptable<-mapingtable[[i]]
-    dataname<-c(data_names[[i]])
-    style<-NULL
-    get_table_code(dataname,mptable,style)
-  }
-  #get geom type Codes
-  get_geomtype_codes<- reactive({
-    c(
-      input$geom_type_1variable,
-      input$geom_type_2variable,
-      input$geom_type_other
-    )
+  # facets_codes<-mapingtable
+  a<- reactive({
+    # browser()
+    for (i in 1:n_data){
+      dataname<-c(data_names[[i]])
+      mptable<-mapingtable[[i]]
+      aa1<-mptable()
+      aa2<-dataname
+      aa3<-colnames(mptable())
+      # dataname<-c(data_names[[i]])
+      style<-NULL
+
+      env_mp<- new.env(parent = emptyenv())
+
+
+      for (j in length(colnames(mptable()))){
+        assign(dataname[j],GetMappingValue(mptable(),j),envir=env_mp)
+      }
+      # RowID<-GetMappingValue(mptable(),2)
+      # Data<-GetMappingValue(mptable(),3)
+      # Denpendency<-GetMappingValue(mptable(),4)
+      # Row<-GetMappingValue(mptable(),5)
+      # Column<-GetMappingValue(mptable(),6)
+
+      a<-get_table_code(dataname,env_mp,style)
+      return(a)
+    }
   })
-
-  output$plot <- renderImage({
-    # pixelratio<- reactive({session$clientData$pixelratio})
-    # web_plot_width <- reactive({input$web_plot_width})
-    # web_plot_height <- reactive({input$web_plot_height})
-    # web_plot_scale <- reactive({input$web_plot_scale})
-    # output_plot_width <- reactive({input$output_plot_width})
-    # output_plot_height <- reactive({input$output_plot_height})
-    # output_plot_dpi <- reactive({input$output_plot_dpi})
-
-    eval(parse_expr(as.character(get_plot_codes())))
-    outfile <- tempfile(fileext='.png')
-    ggsave(outfile,#"ggplot.svg",
-           # path=out_dir<-tempdir(),
-           width = input$output_plot_width,
-           height =input$output_plot_height,
-           units ="cm",
-           scale = input$web_plot_scale
-    )
-   list(
-     src = outfile,#"ggplot.svg",
-     width = input$web_plot_width*session$clientData$pixelratio,
-     height =input$web_plot_height*session$clientData$pixelratio,
-     alt = "This is preview plot"
-   )
+  output$flextable <- renderUI({
+    # outfile <- tempfile(fileext='.png')
+   return(htmltools_value(a()))
   })
 }
 
 
 guitable_dt_Server <- function(input, output, session, data_and_name =NULL, field_groups=NULL) {
   #server = FALSE
+  # browser()
 
   #################################
   #################################
@@ -187,7 +180,9 @@ guitable_dt_Server <- function(input, output, session, data_and_name =NULL, fiel
   #################################
   #################################
   #return
+  a<-env_guitable$dat
   return(list(mptable=reactive({
+    # browser()
     Data_fill()
     Data_select()
     a<-env_guitable$dat

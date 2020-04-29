@@ -7,12 +7,11 @@
 #' @param out_dir The storage path of the output picture, recommend 'out_dir=getwb()'
 #' @export
 #' @return png and pdf of plot
-#' @import shiny ggplot2 svglite
+#' @import shiny flextable reshape2
 #' @importFrom DT datatable DTOutput renderDT JS editData formatStyle
 #' @importFrom rlang parse_expr expr
 #' @importFrom stats na.omit
 #' @importFrom magrittr %>%
-#' @importFrom htmltools withTags
 #' @importFrom methods new
 #' @examples
 #' \donttest{
@@ -27,10 +26,10 @@
 guitable <- function(..., out_dir = NULL) {
   ########################################################
   #Static data
-
-  c1name <- c("none","x","y","ymin","ymax","column","row","group","color","linetype","mark")
-  c2group <- c(rep("1",5),rep("3",2),rep("4",4))
-  c3display <-c(rep("Plot Data",5),rep("Lattice By",2),rep("Group By",4))
+# browser()
+  c1name <- c('None','RowID','Data','Denpendency','Row','Column')
+  c2group <- c(rep("1",6))
+  c3display <-c(rep("Table Data",4),rep("Stratification By",2))
   c_name <- matrix (nrow=3,ncol=length(c1name),byrow = T )
   c_name[1,] <- c1name
   c_name[2,] <- c2group
@@ -103,7 +102,9 @@ guitable <- function(..., out_dir = NULL) {
       parse_expr(b)
     })
 
+    observe(a<-mptable())
     mptable<-reactive({
+      # browser()
       mp_table<-list()
       for (j in 1:nrow(res_data)){
         Parname<-paste(sep="","data_panae_",j)
@@ -128,6 +129,7 @@ guitable <- function(..., out_dir = NULL) {
       mapingtable = mptable(),
       dataname=res_data[,2]
     )
+
 
     callModule(
       module = guitable_layout_updata_server,

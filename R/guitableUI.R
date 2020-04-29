@@ -67,7 +67,16 @@ toolbar_ui<-function(id="guitable"){
     )
   )
 }
-
+setup_tabPanel_panel2<-function(id="guiplot") {
+  ns <- NS(id)
+  tabPanel(
+    'test01',
+    fluidPage(
+      style='float:left',
+      'test02'
+    )
+  )
+}
 
 setup_tabPanel_panel<-function(id="guitable") {
   ns <- NS(id)
@@ -110,125 +119,9 @@ table_ui<-function(id="guitable"){
 	ns <- NS(id)
 	tagList(
 		fluidRow(
-			column(8,offset = 2,plotOutput(ns('table'),width = "auto", height = "auto"))
+			column(8,offset = 2,uiOutput(ns('flextable'),width = "auto", height = "auto"))
 		)
 	)
-}
-
-#Object Options
-object_options_ui<-function(id="guitable") {
-  ns <- NS(id)
-  navlistPanel(
-    fluid = TRUE,
-    widths = c(3, 9),
-    "Plot",
-      tabPanel(
-        "themes",
-        tagList(
-          fluidRow(
-            column(3,
-                   radioButtons(ns("themes"), "themes",
-                                c("theme_gray" = "theme_gray",
-                                  "theme_bw" = "theme_bw",
-                                  "theme_linedraw" = "theme_linedraw",
-                                  "theme_light" = "theme_light",
-                                  "theme_dark" = "theme_dark",
-                                  "theme_minimal" = "theme_minimal",
-                                  "theme_classic" = "theme_classic",
-                                  "theme_void" = "theme_void",
-                                  "theme_minimal" = "theme_minimal")
-                                )
-            )
-          )
-        )
-      ),
-      tabPanel(
-        "Layout",
-        tagList(
-          fluidRow(
-            column(3,
-                   "Preview Plot Set(pixels)",
-                   numericInput(ns('web_plot_height'),'web plot height(pixels)',250),
-                   numericInput(ns('web_plot_width'),'web plot width(pixels)',500),
-                   numericInput(ns('web_plot_scale'),'web plot scale',2,min = 0.1, max = 100, step = 0.1)
-            ),
-            column(3,
-                   "Output Plot Set(cm)",
-                   numericInput(ns('output_plot_height'),label='output plot height(cm)',4,max=4,min=4),
-                   numericInput(ns('output_plot_width'),'output plot width(cm)',8),
-                   numericInput(ns('output_plot_dpi'),'output plot DPI',300)
-            ),
-            column(3,
-                   numericInput(ns('Outer_Margin'),'Outer Margin',0)
-            )
-          )
-        )
-      ),
-      tabPanel(
-        "Lattice"
-      ),
-    "Axes",
-      tabPanel(
-        "X",
-        tagList(
-          fluidRow(
-            column(3,
-              radioButtons(ns("X_Scale"), "Scale",
-                          c("Linear" = "identity",
-                            "log10" = "log10",
-                            "log2" = "log2",
-                            "logit" = "logit",
-                            "probability" = "probability",
-                            "sqrt" = "sqrt"))
-            ),
-            column(3,
-                   radioButtons(ns("X_Range"), "Range",
-                                c("Auto-scale Uniform" = "none",
-                                  "Custom" = "Custom")),
-                   numericInput(ns('X_Minimum'),'Minimum',0),
-                   numericInput(ns('X_Maximum'),'Maximum',100)
-            ),
-            column(3,
-                   numericInput(ns('X_expand_p'),'expand_plot',0.05),
-                   numericInput(ns('X_expand_u'),'expand_unit',0)
-            ),
-          )
-        )
-      ),
-      tabPanel(
-        "Y",
-        tagList(
-          fluidRow(
-            column(3,
-                   radioButtons(ns("Y_Scale"), "Scale",
-                                c("Linear" = "identity",
-                                  "log10" = "log10",
-                                  "log2" = "log2",
-                                  "logit" = "logit",
-                                  "probability" = "probability",
-                                  "sqrt" = "sqrt"))
-            ),
-            column(3,
-                   radioButtons(ns("Y_Range"), "Range",
-                                c("Auto-scale Uniform" = "none",
-                                  "Custom" = "Custom")),
-                   numericInput(ns('Y_Minimum'),'Minimum',0),
-                   numericInput(ns('Y_Maximum'),'Maximum',100)
-            ),
-            column(3,
-                   numericInput(ns('Y_expand_p'),'expand_plot',0.05),
-                   numericInput(ns('Y_expand_u'),'expand_unit',0)
-            )
-          )
-        )
-      ),
-      tabPanel(
-        "Y2"
-      ),
-    tabPanel(
-      "Reference Lines "
-    )
-  )
 }
 
 setup_tabPanel_panel<-function(id="guitable") {
@@ -266,7 +159,7 @@ guitableUI <- fluidPage(
 
 
   #Object Options
-  object_options_ui("guitable"),
+  # object_options_ui("guitable"),
 
   #JS customer
   tags$script(HTML(
