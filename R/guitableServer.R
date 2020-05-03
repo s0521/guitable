@@ -69,15 +69,8 @@ guitable_table_Server <- function(input, output, session, mapingtable =NULL,data
       for (j in 1:length(colnames(mptable()))){
         value_1<-colnames(mptable())[j]
         value_2<-GetMappingValue(mptable(),j)
-        # browser()
         assign(value_1,value_2,envir=env_mp1)
       }
-      # browser()
-      # RowID<-GetMappingValue(mptable(),2)
-      # Data<-GetMappingValue(mptable(),3)
-      # Denpendency<-GetMappingValue(mptable(),4)
-      # Row<-GetMappingValue(mptable(),5)
-      # Column<-GetMappingValue(mptable(),6)
 
       a<-get_table_code(dataname,env_mp1,style)
       return(a)
